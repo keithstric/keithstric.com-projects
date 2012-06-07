@@ -1,0 +1,21 @@
+.xspContainerListBodyWrapper {
+	border: 1px solid #AFAFAF;
+	background-color: #FFFFFF;
+}
+.xspContainerBody {
+	padding-left: 0px;
+	padding-top: 2px;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+.listItem {
+	list-style-type: none;
+	padding: 2px 5px 5px 2px;
+}
+.listItem:hover { 
+	border: 1px dotted #AFAFAF; 
+}
+.listItemSelected { 
+	background: #b7cdee;
+	border: 1px solid #AFAFAF;
+}

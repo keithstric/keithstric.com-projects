@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="852579C30052918D" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="182" sequence="20" unid="B0B372DC7E66DD17852579C3005779F2">
+<created><datetime dst="true">20120316T115528,50-04</datetime></created>
+<modified><datetime dst="true">20120320T110556,12-04</datetime></modified>
+<revised><datetime dst="true">20120316T124433,60-04</datetime></revised>
+<lastaccessed><datetime dst="true">20120320T110556,12-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20120320T110556,12-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Keith Strickland/OU=NA/O=GBS</name></updatedby>
+<wassignedby><name>CN=Keith Strickland/OU=NA/O=GBS</name></wassignedby>
+<item name="$TITLE"><text>XPolls.theme</text></item>
+<item name="$Flags"><text>34567Cg~`</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>XPolls.theme</text></item></note>

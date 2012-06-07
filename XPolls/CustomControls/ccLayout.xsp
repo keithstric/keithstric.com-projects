@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	dojoParseOnLoad="true"
+	dojoTheme="true">
+	<xe:jsonRpcService
+		id="jsonRpcService1"
+		serviceName="frontEndRpc">
+		<xe:this.methods>
+			<xe:remoteMethod name="selectItem">
+				<xe:this.arguments>
+					<xe:remoteMethodArg name="unid" type="string">
+					</xe:remoteMethodArg>
+					<xe:remoteMethodArg name="type" type="string">
+					</xe:remoteMethodArg>
+				</xe:this.arguments>
+				<xe:this.script><![CDATA[print("rpc.selectItem unid=" + unid);
+if (type == "question") {
+	if (unid == null) {
+		sessionScope.remove("selectedQuestion");
+	}else{
+		sessionScope.remove("selectedQuestion");
+		sessionScope.put("selectedQuestion",unid);
+	}
+}else if (type == "answer") {
+	if (unid == null) {
+		sessionScope.remove("selectedAnswer");
+	}else{
+		sessionScope.remove("selectedAnswer");
+		sessionScope.put("selectedAnswer",unid);
+	}
+}]]></xe:this.script>
+			</xe:remoteMethod>
+			<xe:remoteMethod name="deleteDoc">
+				<xe:this.arguments>
+					<xe:remoteMethodArg
+						name="unid"
+						type="string">
+					</xe:remoteMethodArg>
+					<xe:remoteMethodArg
+						name="type"
+						type="string">
+					</xe:remoteMethodArg>
+				</xe:this.arguments>
+				<xe:this.script><![CDATA[print("deleteDoc running unid=" + unid + " type=" + type );
+if (type == "question") {
+	sessionScope.remove("selectedQuestion");
+}else if (type == "answer") {
+	sessionScope.remove("selectedAnswer");
+}
+var doc:NotesDocument = database.getDocumentByUNID(unid);
+doc.remove();
+print("rpc.deleteDoc, selectedQuestion=" + sessionScope.get(selectedQuestion));
+print("rpc.deleteDoc selectedAnswer=" + sessionScope.get(selectedAnswer));]]></xe:this.script>
+			</xe:remoteMethod>
+			<xe:remoteMethod name="createItem">
+				<xe:this.arguments>
+					<xe:remoteMethodArg name="type" type="string">
+					</xe:remoteMethodArg>
+					<xe:remoteMethodArg name="parentUnid"
+						type="string">
+					</xe:remoteMethodArg>
+				</xe:this.arguments>
+				<xe:this.script><![CDATA[var doc = database.createDocument();
+var parentDoc = null;
+if (type == "question") {
+	print("parentUNID = " + parentUnid);
+	doc.replaceItemValue("form","Question");
+	doc.replaceItemValue("parentUnid",parentUnid);
+	parentDoc = database.getDocumentByUNID(parentUnid);
+	print("parentDoc unid = " + parentDoc.getUniversalID());
+	doc.makeResponse(parentDoc);
+	doc.save(true,true);
+	sessionScope.put("selectedQuestion",doc.getUniversalID());
+	return doc.getUniversalID();
+}else if (type == "answer") {	
+	print("parentUNID = " + parentUnid);
+	doc.replaceItemValue("form","Answer");
+	doc.replaceItemValue("parentUnid",parentUnid);
+	parentDoc = database.getDocumentByUNID(parentUnid);
+	print("parentDoc unid = " + parentDoc.getUniversalID());
+	doc.makeResponse(parentDoc);
+	doc.save(true,true);
+	sessionScope.put("selectedAnswer",doc.getUniversalID());
+	return doc.getUniversalID();
+}]]></xe:this.script>
+			</xe:remoteMethod>
+		</xe:this.methods>
+	</xe:jsonRpcService>
+	<xp:this.resources>
+		<xp:script
+			src="/xpolls-cs-api.js"
+			clientSide="true">
+		</xp:script>
+	</xp:this.resources>
+	<xe:applicationLayout id="applicationLayout1">
+		<xp:this.facets>
+			<xe:navigator
+				id="navigator1"
+				xp:key="LeftColumn"
+				keepState="true">
+				<xe:this.treeNodes>
+					<xe:pageTreeNode
+						label="Home"
+						page="/index.xsp">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode
+						label="New Poll"
+						page="/poll.xsp">
+					</xe:pageTreeNode>
+				</xe:this.treeNodes>
+			</xe:navigator>
+		</xp:this.facets>
+		<xp:callback
+			facetName="facet_1"
+			id="callback1">
+		</xp:callback>
+		<xe:this.configuration>
+			<xe:oneuiApplication
+				legalText="Copyright Keith Strickland 2012"
+				titleBarName="XPolls">
+			</xe:oneuiApplication>
+		</xe:this.configuration>
+	</xe:applicationLayout>
+	<xc:ccDebugToolbar
+		load="true"
+		defaultCollapsed="false"
+		collapseTo="left">
+	</xc:ccDebugToolbar>
+</xp:view>

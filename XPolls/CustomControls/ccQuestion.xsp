@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	
+	
+	<xp:panel id="questionContainer">
+		<xp:this.dataContexts>
+			<xp:dataContext var="Question">
+				<xp:this.value><![CDATA[#{javascript:if (sessionScope.containsKey("selectedQuestion")) {
+	print("dataContext creating a Question object for " + sessionScope.get("selectedQuestion").toString());
+	//return new com.xpolls.qaobj.Question(sessionScope.get("selectedQuestion").toString());
+	var doc:NotesDocument = database.getDocumentByUNID(sessionScope.get("selectedQuestion").toString());
+}else{
+	print("dataContext creating a blank Question object");
+	var doc:NotesDocument = database.createDocument();
+}
+return doc;}]]></xp:this.value>
+			</xp:dataContext>
+		</xp:this.dataContexts>
+		<xp:button
+			value="Save Question"
+			id="button1">
+			<xp:eventHandler
+				event="onclick"
+				submit="true"
+				refreshMode="complete">
+				<xp:this.script><![CDATA[if (location.href.indexOf("documentId") == -1) {
+	alert("You must save this poll before saving questions and answers");
+	return false;
+}else{
+	return true;
+}
+]]></xp:this.script>
+				<xp:this.action><![CDATA[#{javascript:var QuestionDoc:NotesDocument = Question;
+QuestionDoc.save(true,true);}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		
+		<xp:br></xp:br>
+		<xe:formTable
+			id="formTable1"
+			formTitle="Edit Question"
+			labelPosition="above">
+			<xe:formColumn id="formColumn1">
+				<xe:formRow
+					id="formRow1"
+					label="Question"
+					labelPosition="inherit" for="question1">
+					<xp:inputText
+						id="question1"
+						value="#{Question.question}">
+					</xp:inputText>
+				</xe:formRow>
+				<xe:formRow
+					id="formRow4"
+					label="Description"
+					labelPosition="inherit" for="questionDescription1">
+					<xp:inputTextarea
+						id="questionDescription1"
+						cols="50"
+						rows="5"
+						value="#{Question.questionDescription}">
+					</xp:inputTextarea>
+				</xe:formRow>
+			</xe:formColumn>
+			<xe:formColumn id="formColumn2">
+				<xe:formRow
+					id="formRow2"
+					label="Field Type"
+					labelPosition="inherit" for="answerFieldType1">
+					<xp:comboBox id="answerFieldType1"
+						value="#{Question.answerFieldType}">
+						<xp:selectItem itemLabel="Radio Buttons"></xp:selectItem>
+						<xp:selectItem itemLabel="Check Boxes"></xp:selectItem>
+						<xp:selectItem itemLabel="Combo Box"></xp:selectItem>
+						<xp:selectItem itemLabel="Text Field"></xp:selectItem>
+					</xp:comboBox>
+				</xe:formRow>
+			</xe:formColumn>
+			<xe:formColumn id="formColumn3">
+				<xe:formRow
+					id="formRow3"
+					label="Answer Required"
+					labelPosition="inherit" for="answerRequired1">
+					<xp:checkBox
+						text="Yes"
+						id="answerRequired1"
+						checkedValue="Yes"
+						uncheckedValue="No"
+						value="#{Question.answerRequired}">
+					</xp:checkBox>
+				</xe:formRow>
+			</xe:formColumn>
+		</xe:formTable>
+	</xp:panel>
+</xp:view>

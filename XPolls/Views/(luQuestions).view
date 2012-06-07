@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='852579C30052918D'>
+<noteinfo noteid='19e' unid='D7567036E3ADF5BC852579C4005DAC06' sequence='7'>
+<created><datetime dst='true'>20120317T130308,86-04</datetime></created>
+<modified><datetime dst='true'>20120320T110556,25-04</datetime></modified>
+<revised><datetime dst='true'>20120319T162244,96-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20120320T113842,29-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20120320T110556,25-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Keith Strickland/OU=NA/O=GBS</name></updatedby>
+<wassignedby><name>CN=Keith Strickland/OU=NA/O=GBS</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>(luQuestions)|questions</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+agAFADAAKwAEAAoACAAEAAkAcGFyZW50VW5pZHF1ZXN0aW9uZm9ybSRDb25mbGljdAAEAAQAAAAq
+AAUABABmb3JtAQAIAFF1ZXN0aW9uAQAIAHF1ZXN0aW9uHwIKAgMABwAKAAQACUwxUw==
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+FwABAABEiGYHAAAKAHBhcmVudFVuaWQ=
+</rawitemdata></item>
+<item name='$ViewFormat' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQADAAQACgAAAFZDAwQKAAoAAAAAAHoAAQAACgABAAAAAAAAAAICAAAAVkMAAAgACAAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAABWQwAABAAEAAAAAABQAAEAAAoAAAAAAAAAAAACAgAAAHBhcmVudFVu
+aWRQYXJlbnRVbmlkcXVlc3Rpb25RdWVzdGlvbmZvcm1Gb3JtJgABAAAAAQEACQEAAAoBAQ4KAAAB
+AK0rAQABAAEAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAA
+AAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEA
+CQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABCABAAAAABAP///wAFAP//
+/wABAAAAAAAAAAAAAAAAAAEA////AAEA////AAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAIAAAAAAAB
+AA==
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>PY</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

@@ -1,0 +1,9 @@
+<theme extends="oneuiv2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd" >
+	<control>
+		<name>FormLayout.FormTable</name>
+		<property>
+			<name>labelWidth</name>
+			<value>20%</value>
+		</property>
+	</control>
+</theme>
