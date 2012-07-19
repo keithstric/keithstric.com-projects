@@ -34,6 +34,7 @@ dojo.declare("xpolls.dijit.ListSelector",
 			console.log("postCreate running");
 			this.addStyle("xpolls.dijit.css.ListSelector");
 			dojo.connect(this.newItemButton, "onclick", this, "_newItem");
+			//TODO
 			//dojo.connect(this.moveItemUpButton, "onclick", this, "_moveItemUp");
 			//dojo.connect(this.moveItemDownButton, "onclick", this, "moveItemDown");
 			dojo.connect(this.removeItemButton, "onclick", this, "_removeItem");
@@ -67,14 +68,12 @@ dojo.declare("xpolls.dijit.ListSelector",
 		try {
 			console.log("_fetchData running datasource=",this.dataSource);
 			if (this.dataSource) {
-				console.log("_fetchData this.parentUnid = ",this.parentUnid);
 				if (!this.parentUnid && this.isQuestionList) {					
 					this.parentUnid = XPolls.getUrlParameter("documentId");
 				}else if (this.isAnswerList) {
 					this.parentUnid = XPolls.selectedQuestion;
 					this._clearList();
 				}
-				console.log("_fetchData after setting parentUnid, parentUnid = ",this.parentUnid);
 				var url = XPolls.getNsfUrl() + "/" + this.dataSource.viewName + "?readviewentries" + "&outputformat=json&restricttocategory=" + this.parentUnid;
 				var labelCol = this.dataSource.labelCol;
 				var valueCol = this.dataSource.valueCol;
@@ -119,14 +118,19 @@ dojo.declare("xpolls.dijit.ListSelector",
 		try {
 			console.log("_selectItem running item=",item);
 			var unid = dojo.attr(item,"unid");
+			console.log("working with unid " + unid);
 			//Get any other nodes that are currently selected
-			var selected = dojo.query(".listItemSelected")[0];
-			console.log("selected item ",selected);
-			//Unselect any nodes that are not the newly selected node
+			var selected = dojo.query(".listItemSelected");
+			var parentDomNode = this.domNode;
 			if (selected) {
-				if (dojo.attr(item,"unid") != dojo.attr(selected,"unid")) {
-					dojo.toggleClass(selected,"listItemSelected");
-				}
+				//Unselect any nodes that are not the newly selected node
+				dojo.forEach(selected,function(selectedItem) {
+					if (dojo.attr(item,"unid") != dojo.attr(selectedItem,"unid")) {
+						if (dojo.isDescendant(selectedItem,parentDomNode)) {
+							dojo.toggleClass(selectedItem,"listItemSelected");
+						}
+					}
+				});
 			}
 			//Toggle the 'listItemSelected' class on the clicked on node
 			dojo.toggleClass(item,"listItemSelected");
@@ -134,39 +138,43 @@ dojo.declare("xpolls.dijit.ListSelector",
 				if (unid) {
 					var answerList = dijit.byId("listSelector2_container");
 					if (!dojo.hasClass(item,"listItemSelected")) {
-						console.log("got a unid but we're no longer selected");
+						console.log("question, no listItemSelected class")
 						XPolls.selectedQuestion = null;
 						frontEndRpc.selectItem(null,"question");
 						if (answerList) {
 							answerList._clearList();
 						}
 					}else{
-						console.log("got a unid and we're selected ",unid);
+						console.log("question, has listItemSelected class");
 						XPolls.selectedQuestion = unid;
 						frontEndRpc.selectItem(unid,"question");
 						if (answerList) {
 							answerList._fetchData();
 						}
 					}
+					XPolls.selectedAnswer = null;
+					frontEndRpc.selectItem(null,"answer");
 				}else{
-					console.log("don't have a unid");
 					XPolls.selectedQuestion = "newQuestion";
 					frontEndRpc.selectItem("newQuestion","question");
 				}
 			}else if (this.isAnswerList) {
-				if (dojo.attr(item,"unid")) {
-					XPolls.selectedAnswer = unid;
-					frontEndRpc.selectItem(unid,"answer");
+				if (unid) {
+					if (!dojo.hasClass(item,"listItemSelected")) {
+						XPolls.selectedAnswer = null;
+						frontEndRpc.selectItem(null,"answer");
+					}else{
+						XPolls.selectedAnswer = unid;
+						frontEndRpc.selectItem(unid,"answer");
+					}
 				}else{
 					XPolls.selectedAnswer = "newAnswer";
 					frontEndRpc.selectItem("newAnswer","answer");
 				}
 			}
 			var container = dojo.query("[id$=':QuestionAnswerContainer']")[0];
-			//console.log("_selectItem container=",container);
 			if (container) {
-				console.log("refreshing " + container.id);
-				this._doFullRefresh("fullRefresh", container.id, {});
+				XSP.partialRefreshGet(container.id,{});
 			}
 		}catch (errorObj) {
 			var errorTxt = "_selectItem failed to complete";
@@ -216,6 +224,7 @@ dojo.declare("xpolls.dijit.ListSelector",
 		}
 	},
 	_createLi: function(label, value, unid) {
+		console.log("_createLi running label=",label," value=",value," unid=",unid);
 		try {
 			//console.log("_createLi running, label/value/unid=",label,value,unid);
 			if (!value && !label) {

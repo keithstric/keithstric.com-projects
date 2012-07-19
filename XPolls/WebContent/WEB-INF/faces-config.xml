@@ -5,6 +5,11 @@
     <managed-bean-class>com.xpolls.beans.Poll</managed-bean-class>
     <managed-bean-scope>view</managed-bean-scope>
   </managed-bean>
+  <managed-bean>
+  	<managed-bean-name>PollUtils</managed-bean-name>
+  	<managed-bean-class>com.xpolls.utils.PollUtils</managed-bean-class>
+  	<managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
   <render-kit>
     <renderer>
       <component-family>com.xpolls</component-family>

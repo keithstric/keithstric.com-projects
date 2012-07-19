@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xp:view
 	xmlns:xp="http://www.ibm.com/xsp/core"
-	xmlns:xc="http://www.ibm.com/xsp/custom">
-	<xc:ccLayout><xp:this.facets>
-	<xc:ccFormPoll xp:key="facet_1"></xc:ccFormPoll></xp:this.facets></xc:ccLayout></xp:view>
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	dojoTheme="true"
+	dojoParseOnLoad="true">
+	<xc:ccLayout>
+		<xp:this.facets>
+			<xc:ccFormPoll xp:key="facet_1"></xc:ccFormPoll>
+		</xp:this.facets>
+	</xc:ccLayout>
+</xp:view>

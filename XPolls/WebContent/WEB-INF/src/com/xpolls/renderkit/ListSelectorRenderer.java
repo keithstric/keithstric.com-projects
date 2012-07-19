@@ -56,11 +56,25 @@ public class ListSelectorRenderer extends Renderer {
 		}
 		String labelCol = c.getLabelCol().toString();
 		String valueCol = c.getValueCol().toString();
-		scriptStr = "var dijContainer = dojo.query(\"[id='" + c.getId() + "_container']\")[0];" + "var dijNode = dojo.query(\"[id$=':"
-				+ c.getId() + "']\");" + "var dij = null;" + "if (dijNode[0]){" + "dij = dijit.byId(dijNode[0].id);" + "}" + "if (!dij) {"
-				+ "dij = new xpolls.dijit.ListSelector({" + "dataView:'" + dataView + "'," + "isAnswerList:" + isAnswerList + ","
-				+ "isQuestionList:" + isQuestionList + "," + "dataSource: { labelCol:" + labelCol + "," + "valueCol:" + valueCol
-				+ ",viewName:'" + dataView + "'}" + "},dijContainer);}";
+		StringBuilder sb = new StringBuilder();
+		sb.append("var dijContainer = dojo.query(\"[id='" + c.getId() + "_container']\")[0];");
+		sb.append("var dijNode = dojo.query(\"[id$=':" + c.getId() + "']\");");
+		sb.append("var dij = null;");
+		sb.append("if (dijNode[0]){");
+		sb.append("dij = dijit.byId(dijNode[0].id);");
+		sb.append("}");
+		sb.append("if (!dij) {");
+		sb.append("dij = new xpolls.dijit.ListSelector({");
+		sb.append("dataView:'" + dataView + "',");
+		sb.append("isAnswerList:" + isAnswerList + ",");
+		sb.append("isQuestionList:" + isQuestionList + ",");
+		sb.append("dataSource: {");
+		sb.append("labelCol:" + labelCol + ",");
+		sb.append("valueCol:" + valueCol + ",");
+		sb.append("viewName:'" + dataView + "'}");
+		sb.append("}");
+		sb.append(",dijContainer);}");
+		scriptStr = sb.toString();
 		return scriptStr;
 	}
 

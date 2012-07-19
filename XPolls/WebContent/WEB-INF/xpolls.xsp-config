@@ -4,7 +4,7 @@
 		<namespace-uri>http://www.xpolls.com/xsp/xpolls</namespace-uri>
 		<default-prefix>xpolls</default-prefix>
 	</faces-config-extension>
-	<component>
+	<component id="ListSelector">
 		<description>A dojo list to allow selections of questions and answers</description>
 		<display-name>List Selector</display-name>
 		<component-type>com.xpolls.components.ListSelector</component-type>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xpolls="http://www.xpolls.com/xsp/xpolls">
+	<xp:this.data>
+		<xp:dominoView
+			viewName="(luPublishedPolls)"
+			var="publishedPolls">
+		</xp:dominoView>
+	</xp:this.data>
+
+	<xp:repeat
+		id="repeat1"
+		rows="5"
+		var="poll"
+		indexVar="pollIndex"
+		repeatControls="true">
+		<xp:this.value><![CDATA[#{javascript:var pollView = database.getView("(luPublishedPolls)");
+return pollView.getAllEntries();}]]></xp:this.value>
+		
+		<xe:widgetContainer
+			id="widgetContainer1"
+			style="margin: 10px;">
+			<xe:this.titleBarText><![CDATA[#{javascript:poll.getDocument().getItemValueString("title");}]]></xe:this.titleBarText>
+			<xp:panel>
+				<ul>
+					<xp:repeat
+						id="Questions"
+						rows="10"
+						indexVar="questionIndex"
+						var="question"
+						repeatControls="true">
+						<xp:this.value><![CDATA[#{javascript:var questionView = database.getView("(luQuestions)");
+return questionView.getAllEntriesByKey(poll.getDocument().getUniversalID());}]]></xp:this.value>
+						<li>
+							<xp:text
+								escape="true"
+								id="computedField1">
+								<xp:this.value><![CDATA[#{javascript:var dispQuestion = question.getDocument().getItemValueString("question");
+var answerContainer = getComponent("answerContainer-" + questionIndex);
+var fieldType = question.getDocument().getItemValueString("answerFieldType");
+var answers = PollUtils.getAnswers(question.getDocument().getUniversalID());
+if (answers != null && answers.size() > 0) {
+	PollUtils.setAnswer(answers);
+	if (fieldType.equalsIgnoreCase("Check Boxes")) {
+		field = PollUtils.getCheckBoxes();
+		answerContainer.getChildren().add(field);
+	}else if (fieldType.equalsIgnoreCase("Text Field")) {
+		var fields = PollUtils.getInputText();
+		for (var i = 0;i < fields.size();i++) {
+			answerContainer.getChildren().add(fields[i]);
+			answerContainer.getChildren().add(new com.ibm.xsp.component.xp.XspLineBreak());
+		}
+	}else if (fieldType.equalsIgnoreCase("Combo Box")) {
+		field = PollUtils.getComboBox();
+		answerContainer.getChildren().add(field);
+	}else{
+		field = PollUtils.getRadioButtons();
+		answerContainer.getChildren().add(field);
+	}
+}
+return dispQuestion;}]]></xp:this.value>
+							</xp:text>
+							<xp:panel>
+								<xp:this.id><![CDATA[${javascript:return "answerContainer-" + questionIndex;}]]></xp:this.id>
+							</xp:panel>
+							
+						</li>
+					</xp:repeat>
+				</ul>
+			</xp:panel>
+		<xp:panel>
+			<xp:button
+				value="Vote"
+				id="button1">
+			</xp:button>
+			<xp:button
+				value="Results"
+				id="button2">
+			</xp:button></xp:panel></xe:widgetContainer>
+	</xp:repeat>
+	</xp:view>
