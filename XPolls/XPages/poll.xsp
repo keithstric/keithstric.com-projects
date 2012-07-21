@@ -6,7 +6,7 @@
 	dojoParseOnLoad="true">
 	<xc:ccLayout>
 		<xp:this.facets>
-			<xc:ccFormPoll xp:key="facet_1"></xc:ccFormPoll>
+			<xc:ccPollConfig xp:key="facet_1"></xc:ccPollConfig>
 		</xp:this.facets>
 	</xc:ccLayout>
 </xp:view>

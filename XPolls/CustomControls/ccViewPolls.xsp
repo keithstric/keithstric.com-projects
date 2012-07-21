@@ -3,7 +3,7 @@
 
 	<xp:viewPanel
 		rows="30"
-		id="viewPanel1">
+		id="viewPanel1" pageName="/pollconfig.xsp">
 		<xp:this.facets>
 			<xp:pager
 				partialRefresh="true"

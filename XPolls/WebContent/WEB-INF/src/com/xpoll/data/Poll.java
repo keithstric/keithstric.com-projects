@@ -13,6 +13,7 @@ import lotus.domino.NotesException;
 import com.debug.DebugToolbar;
 import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.xpoll.utils.JSFUtils;
+import com.xpoll.utils.MIMEBean;
 
 public class Poll implements Serializable {
 
@@ -217,6 +218,8 @@ public class Poll implements Serializable {
 						} else if (item.getName().equalsIgnoreCase("votingAllowedTo")) {
 							setVotingAllowedTo(item.getDateTimeValue().toJavaDate());
 						}
+						Poll desPoll = (Poll) MIMEBean.restoreState(doc, "PollData");
+						setQuestions(desPoll.getQuestions());
 					}
 				}
 			}
@@ -229,13 +232,18 @@ public class Poll implements Serializable {
 		try {
 			Database db = JSFUtils.getCurrentDatabase();
 			Document doc = null;
-			if (getUnid() != null) {
+			String unid = getUnid();
+			if (unid != null && !unid.isEmpty()) {
 				doc = db.getDocumentByUNID(getUnid());
 			} else {
 				doc = db.createDocument();
 				doc.replaceItemValue("form", "Poll");
 				doc.save(true);
 			}
+			/*
+			 * Doing this so that we can set data for the view for admin
+			 * purposes
+			 */
 			doc.replaceItemValue("afterVotingGoto", getAfterVotingGoto());
 			doc.replaceItemValue("afterVotingGotoUrl", getAfterVotingGotoUrl());
 			doc.replaceItemValue("allowAnonymousVoting", getAllowAnonymousVoting().toString());
@@ -256,6 +264,14 @@ public class Poll implements Serializable {
 			doc.replaceItemValue("votingAllowedTo", toDateTime);
 			doc.replaceItemValue("unid", doc.getUniversalID());
 			doc.save();
+
+			/*
+			 * Serialize the Poll to the PollData field. When displaying a poll
+			 * to a user we'll deserialize this information so we know the
+			 * questions and answers. We'll also deserialize this information in
+			 * the admin panel.
+			 */
+			MIMEBean.saveState(this, doc, "PollData");
 		} catch (NotesException e) {
 			e.printStackTrace();
 		}
