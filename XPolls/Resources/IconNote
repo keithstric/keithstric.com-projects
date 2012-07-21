@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
 <note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='8.5'
- maintenanceversion='3.0' replicaid='852579C30052918D'>
-<noteinfo noteid='122' unid='5211E3EB71A013B3852579C3005291BA' sequence='10'>
-<created><datetime dst='true'>20120316T110152,58-04</datetime></created>
-<modified><datetime dst='true'>20120320T110554,06-04</datetime></modified>
-<revised><datetime dst='true'>20120316T115808,72-04</datetime></revised>
-<lastaccessed><datetime dst='true'>20120320T110554,06-04</datetime></lastaccessed>
-<addedtofile><datetime dst='true'>20120320T110554,06-04</datetime></addedtofile></noteinfo>
+ maintenanceversion='3.0' replicaid='85257A410003BCFF'>
+<noteinfo noteid='11a' unid='F18F133B1B1DFD4785257A410003BD17' sequence='8'>
+<created><datetime dst='true'>20120719T204050,15-04</datetime></created>
+<modified><datetime dst='true'>20120720T181808,81-04</datetime></modified>
+<revised><datetime dst='true'>20120720T181808,80-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20120720T181808,81-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20120719T204050,21-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Keith Strickland/OU=NA/O=GBS</name></updatedby>
 <item name='IconBitmap' summary='true'>
 <rawitemdata type='6'>
@@ -24,11 +24,11 @@ L2ZvgAAACMZmZmZmZmZmZmZmbIAAAACMZmZmZmZmZmZmZsgAAAAACMZmZmZmZmZmZmyAAAAAAACM
 9mZmZmZmZm/IAAAAAAAACIz2ZmZmZm/IgAAAAAAAAAAIiMZmZmyIgAAAAAAAAAAAAACIiIiIAAAA
 AAAAUEECICABAAD/////+A4DgA==
 </rawitemdata></item>
-<item name='$DBTheme'><text>XPolls.theme</text></item>
-<item name='$DefaultXPage'><text>index.xsp</text></item>
-<item name='$TITLE'><text>XPolls
-</text></item>
+<item name='$Daos'><text>0</text></item>
+<item name='$TITLE'><text>XPolls Reboot</text></item>
+<item name='$DefaultXPage'><text>pollconfig.xsp</text></item>
+<item name='$DBTheme'><text>XPoll.theme</text></item>
+<item name='$Flags'><text>J!</text></item>
 <item name='$FlagsNoRefresh'><text/></item>
-<item name='$Flags'><text>J!7</text></item>
-<item name='$Daos'><text>0</text></item></note>
+<item name='$AllowRESTDbAPI'><number>2</number></item></note>
 

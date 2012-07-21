@@ -1,10 +1,11 @@
-package com.xpolls.utils;
+package com.xpoll.utils;
 
 import javax.faces.context.FacesContext;
 
 import lotus.domino.Database;
 
 import com.ibm.domino.xsp.module.nsf.NotesContext;
+import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.designer.context.ServletXSPContext;
 
 public class JSFUtils {
@@ -21,6 +22,14 @@ public class JSFUtils {
 
 	public static Database getCurrentDatabase() {
 		return NotesContext.getCurrent().getCurrentDatabase();
+	}
+
+	public static FacesContext getFacesContext() {
+		return FacesContext.getCurrentInstance();
+	}
+
+	public static FacesContextEx getFacesContextEx() {
+		return FacesContextEx.getCurrentInstance();
 	}
 
 }

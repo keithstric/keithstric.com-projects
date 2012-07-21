@@ -13,5 +13,16 @@
         <in-palette>true</in-palette>
       </designer-extension>
     </composite-extension>
+    <property>
+      <property-name>pollQuestion</property-name>
+      <property-class>java.lang.Object</property-class>
+      <display-name>Question</display-name>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.MethodBindingEditor</editor>
+        </designer-extension>
+        <required>false</required>
+      </property-extension>
+    </property>
   </composite-component>
 </faces-config>

@@ -2,52 +2,57 @@
 <xp:view
 	xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
 	
-	<xp:panel id="answerContainer">
-		<xp:this.dataContexts>
-			<xp:dataContext var="Answer">
-				<xp:this.value><![CDATA[#{javascript:if (sessionScope.containsKey("selectedAnswer")) {
-	print("dataContext creating a Answer object for " + sessionScope.get("selectedAnswer").toString());
-	//return new com.xpolls.qaobj.Question(sessionScope.get("selectedQuestion").toString());
-	var doc:NotesDocument = database.getDocumentByUNID(sessionScope.get("selectedAnswer").toString());
-}else{
-	print("dataContext creating a blank Answer object");
-	var doc:NotesDocument = database.createDocument();
-}
-return doc;}]]></xp:this.value>
-			</xp:dataContext>
-		</xp:this.dataContexts>
-		<xp:button value="Save Answer" id="button1">
-			<xp:eventHandler event="onclick" submit="true"
-				refreshMode="complete">
-				<xp:this.action><![CDATA[#{javascript:var AnswerDoc:NotesDocument = Answer;
-AnswerDoc.save(true,true);}]]></xp:this.action>
-			</xp:eventHandler></xp:button><xe:formTable id="formTable1" formTitle="Answer"
+	<xp:panel styleClass="AnswerContainer">
+		<xe:formTable
+			id="formTable1"
 			labelPosition="above">
-			
 			<xe:formColumn id="formColumn1">
-				<xe:formRow id="formRow1" label="Answer">
-					<xp:inputText id="option1" value="#{Answer.option}"></xp:inputText>
-				</xe:formRow>
-				<xe:formRow id="formRow2" label="Description">
-					<xp:inputTextarea id="optionDescription1" cols="50"
-						rows="5" value="#{Answer.optionDescription}">
+				<xe:formRow id="formRow1">
+
+					<xe:this.label><![CDATA[#{javascript:var questionNum = Poll.getQuestions().get(question).getSortOrder();
+var answerNum = compositeData.questionAnswer.getSortOrder();
+var dispNum = questionNum.toString() + "." + answerNum.toString();
+return "Answer #" + dispNum;}]]></xe:this.label>
+					<xp:inputTextarea
+						id="inputTextarea1"
+						cols="40"
+						rows="1"
+						value="#{compositeData.questionAnswer.answer}">
 					</xp:inputTextarea>
 				</xe:formRow>
 			</xe:formColumn>
 			<xe:formColumn id="formColumn2">
-				<xe:formRow id="formRow3" label="Allow Free Text">
-					<xp:checkBox text="Yes" id="allowFreeText1"
-						checkedValue="Yes" uncheckedValue="No" value="#{Answer.allowFreeText}">
+				<xe:formRow
+					id="formRow2"
+					label="Allow Free Text">
+					<xp:checkBox
+						text="Yes"
+						id="checkBox1"
+						value="#{compositeData.questionAnswer.freeTextAllowed}">
 					</xp:checkBox>
 				</xe:formRow>
-			</xe:formColumn>
-			<xe:formColumn id="formColumn3">
-				<xe:formRow id="formRow4"
-					label="Free Text is New Option">
-					<xp:checkBox text="Yes" checkedValue="Yes"
-						uncheckedValue="No" id="allowNewOption" value="#{Answer.allowNewOption}">
+				<xe:formRow
+					id="formRow3"
+					label="Free Text is new Available Answer">
+					<xp:checkBox
+						text="Yes"
+						id="checkBox2"
+						value="#{compositeData.questionAnswer.freeTextNewOption}">
 					</xp:checkBox>
+				</xe:formRow>
+				<xe:formRow id="formRow4">
+					<xp:button
+						value="Delete"
+						id="button1">
+						<xp:eventHandler
+							event="onclick"
+							submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:Poll.getQuestions().get(question).getAnswers().remove(answer);}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
 				</xe:formRow>
 			</xe:formColumn>
 		</xe:formTable>

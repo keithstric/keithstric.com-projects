@@ -5,9 +5,9 @@
     <default-prefix>xc</default-prefix>
   </faces-config-extension>
   <composite-component>
-    <component-type>ccFormPoll</component-type>
-    <composite-name>ccFormPoll</composite-name>
-    <composite-file>/ccFormPoll.xsp</composite-file>
+    <component-type>ccNavigator</component-type>
+    <composite-name>ccNavigator</composite-name>
+    <composite-file>/ccNavigator.xsp</composite-file>
     <composite-extension>
       <designer-extension>
         <in-palette>true</in-palette>

@@ -1,9 +1,8 @@
-package com.xpolls.beans;
+package com.xpoll.data;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.TreeMap;
 
 import lotus.domino.Database;
 import lotus.domino.DateTime;
@@ -13,8 +12,7 @@ import lotus.domino.NotesException;
 
 import com.debug.DebugToolbar;
 import com.ibm.domino.xsp.module.nsf.NotesContext;
-import com.xpolls.qaobj.Question;
-import com.xpolls.utils.JSFUtils;
+import com.xpoll.utils.JSFUtils;
 
 public class Poll implements Serializable {
 
@@ -32,7 +30,7 @@ public class Poll implements Serializable {
 	private String sendEmailConfirmation;
 	private String emailSubject;
 	private String emailText;
-	private Map<String, Question> questions;
+	private TreeMap<String, Question> questions;
 	private String unid;
 
 	public Poll() {
@@ -151,15 +149,15 @@ public class Poll implements Serializable {
 		this.emailText = emailText;
 	}
 
-	public Map<String, Question> getQuestions() {
+	public TreeMap<String, Question> getQuestions() {
 		if (questions != null) {
 			return questions;
 		} else {
-			return new HashMap<String, Question>();
+			return new TreeMap<String, Question>();
 		}
 	}
 
-	public void setQuestions(Map<String, Question> questions) {
+	public void setQuestions(TreeMap<String, Question> questions) {
 		this.questions = questions;
 	}
 
@@ -183,52 +181,44 @@ public class Poll implements Serializable {
 		try {
 			DebugToolbar.info("Poll.loadDoc running");
 			if (getUnid() != null) {
-				DebugToolbar.info("unid = " + getUnid(), "Poll.loadDoc");
 				Database db = JSFUtils.getCurrentDatabase();
-				Document doc = db.getDocumentByUNID(getUnid());
-				for (Object itemObj : doc.getItems()) {
-					Item item = (Item) itemObj;
-					if (item.getName().equalsIgnoreCase("afterVotingGoto")) {
-						setAfterVotingGoto(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("afterVotingGotoUrl")) {
-						setAfterVotingGotoUrl(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("allowAnonymousVoting")) {
-						setAllowAnonymousVoting(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("emailSubject")) {
-						setEmailSubject(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("emailText")) {
-						setEmailText(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("introText")) {
-						setIntroText(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("sendEmailConfirmation")) {
-						setSendEmailConfirmation(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("showNumVoters")) {
-						setShowNumVoters(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("tags")) {
-						setTags(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("thankYouText")) {
-						setThankYouText(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("title")) {
-						setTitle(item.getValueString());
-					} else if (item.getName().equalsIgnoreCase("unid")) {
-						setUnid(doc.getUniversalID());
-					} else if (item.getName().equalsIgnoreCase("votingAllowedFrom")) {
-						setVotingAllowedFrom(item.getDateTimeValue().toJavaDate());
-					} else if (item.getName().equalsIgnoreCase("votingAllowedTo")) {
-						setVotingAllowedTo(item.getDateTimeValue().toJavaDate());
+				String unid = getUnid();
+				DebugToolbar.info("unid = '" + unid + "'", "Poll.loadDoc");
+				if (unid != null && !unid.isEmpty()) {
+					Document doc = db.getDocumentByUNID(unid);
+					for (Object itemObj : doc.getItems()) {
+						Item item = (Item) itemObj;
+						if (item.getName().equalsIgnoreCase("afterVotingGoto")) {
+							setAfterVotingGoto(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("afterVotingGotoUrl")) {
+							setAfterVotingGotoUrl(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("allowAnonymousVoting")) {
+							setAllowAnonymousVoting(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("emailSubject")) {
+							setEmailSubject(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("emailText")) {
+							setEmailText(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("introText")) {
+							setIntroText(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("sendEmailConfirmation")) {
+							setSendEmailConfirmation(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("showNumVoters")) {
+							setShowNumVoters(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("tags")) {
+							setTags(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("thankYouText")) {
+							setThankYouText(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("title")) {
+							setTitle(item.getValueString());
+						} else if (item.getName().equalsIgnoreCase("unid")) {
+							setUnid(doc.getUniversalID());
+						} else if (item.getName().equalsIgnoreCase("votingAllowedFrom")) {
+							setVotingAllowedFrom(item.getDateTimeValue().toJavaDate());
+						} else if (item.getName().equalsIgnoreCase("votingAllowedTo")) {
+							setVotingAllowedTo(item.getDateTimeValue().toJavaDate());
+						}
 					}
 				}
-				/*DocumentCollection docCol = doc.getResponses();
-				if (docCol.getCount() > 0) {
-					Document respDoc = docCol.getFirstDocument();
-					Map<String, Question> questMap = new HashMap<String, Question>();
-					while (respDoc != null) {
-						Question quest = new Question(respDoc.getUniversalID());
-						questMap.put(respDoc.getUniversalID(), quest);
-						respDoc = docCol.getNextDocument(respDoc);
-					}
-					setQuestions(questMap);
-				}*/
 			}
 		} catch (NotesException e) {
 			e.printStackTrace();

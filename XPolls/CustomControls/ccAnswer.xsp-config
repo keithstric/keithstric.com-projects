@@ -13,5 +13,15 @@
         <in-palette>true</in-palette>
       </designer-extension>
     </composite-extension>
+    <property>
+      <property-name>questionAnswer</property-name>
+      <property-class>java.lang.Object</property-class>
+      <display-name>Answer</display-name>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.MethodBindingEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
   </composite-component>
 </faces-config>

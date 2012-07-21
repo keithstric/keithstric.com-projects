@@ -3,4 +3,6 @@
 	xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xc="http://www.ibm.com/xsp/custom">
 	<xc:ccLayout><xp:this.facets>
-	<xc:ccViewPolls xp:key="facet_1"></xc:ccViewPolls></xp:this.facets></xc:ccLayout></xp:view>
+	<xc:ccViewPolls xp:key="facet_2"></xc:ccViewPolls>
+	<xc:ccNavigator xp:key="facet_1"></xc:ccNavigator>
+</xp:this.facets></xc:ccLayout></xp:view>

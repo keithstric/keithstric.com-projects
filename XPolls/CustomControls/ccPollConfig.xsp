@@ -4,6 +4,9 @@
 	xmlns:xe="http://www.ibm.com/xsp/coreex"
 	xmlns:xc="http://www.ibm.com/xsp/custom"
 	xmlns:xpolls="http://www.xpolls.com/xsp/xpolls">
+	<xp:this.resources>
+		<xp:styleSheet href="/PollConfig.css"></xp:styleSheet>
+	</xp:this.resources>
 	<xp:eventHandler
 		id="fullRefresh"
 		submit="true"
@@ -244,16 +247,7 @@
 			<xp:tabPanel
 				label="Questions"
 				id="tabPanel2">
-				<xp:button
-					value="Refresh Answers"
-					id="button2">
-					<xp:eventHandler
-						event="onclick"
-						submit="true"
-						refreshMode="partial"
-						refreshId="formTable5">
-					</xp:eventHandler>
-				</xp:button>
+
 				<xe:formTable
 					id="formTable5"
 					labelPosition="above"
@@ -261,51 +255,48 @@
 					<xe:formColumn id="formColumn8">
 						<xe:formRow
 							id="formRow16"
-							label="Questions"
-							for="listSelector1">
-							<xpolls:listSelector
-								id="listSelector1"
-								questionList="true"
-								viewName="questions"
-								answerList="false"
-								labelCol="0"
-								valueCol="0">
-							</xpolls:listSelector>
+							label="Questions">
+
+							<xp:button
+								value="New Question"
+								id="button2">
+								<xp:eventHandler
+									event="onclick"
+									submit="true"
+									refreshMode="partial"
+									refreshId="formTable5">
+									<xp:this.action><![CDATA[#{javascript:var numQuestions = Poll.getQuestions().size() +1;
+var questionsMap:java.util.Map = Poll.getQuestions();
+var questionRepeat = getComponent("questionsRepeat");
+questionRepeat.setRows(numQuestions);
+var newQuestion = new com.xpoll.data.Question();
+newQuestion.setSortOrder(numQuestions);
+questionsMap.put(numQuestions.toString(), newQuestion);
+Poll.setQuestions(questionsMap);}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:repeat
+								id="questionsRepeat"
+								value="#{javascript:return Poll.getQuestions().keySet();}"
+								var="question"
+								indexVar="questionIndex"
+								rows="0">
+
+
+
+
+
+
+								<xc:ccQuestion pollQuestion="#{javascript:Poll.getQuestions().get(question);}"></xc:ccQuestion>
+							</xp:repeat>
 						</xe:formRow>
 					</xe:formColumn>
-					<xe:formColumn id="formColumn9">
-						<xe:formRow
-							id="formRow17"
-							label="Options"
-							for="listSelector2">
-							<xpolls:listSelector
-								id="listSelector2"
-								viewName="answers"
-								valueCol="1"
-								labelCol="0"
-								questionList="false"
-								answerList="true">
-							</xpolls:listSelector>
-						</xe:formRow>
-					</xe:formColumn>
+
 				</xe:formTable>
-				<xp:br></xp:br>
+
 
 				<xp:panel id="QuestionAnswerContainer">
-					<xc:ccQuestion>
-						<xc:this.rendered><![CDATA[#{javascript:if (sessionScope.get("selectedQuestion") && !sessionScope.get("selectedAnswer")) {
-	return true;
-}else{
-	return false;
-}}]]></xc:this.rendered>
-					</xc:ccQuestion>
-					<xc:ccAnswer>
-						<xc:this.rendered><![CDATA[#{javascript:if (sessionScope.get("selectedAnswer")) {
-	return true;
-}else{
-	return false;
-}}]]></xc:this.rendered>
-					</xc:ccAnswer>
+
 				</xp:panel>
 			</xp:tabPanel>
 		</xp:tabbedPanel>

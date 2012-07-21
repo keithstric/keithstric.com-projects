@@ -1,4 +1,4 @@
-package com.xpolls.utils;
+package com.xpoll.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;

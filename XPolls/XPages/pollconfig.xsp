@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	dojoParseOnLoad="true"
+	dojoTheme="true">
+
+	<xp:this.resources>
+		<xp:script
+			src="/xpDebugToolbar.jss"
+			clientSide="false">
+		</xp:script>
+	</xp:this.resources>
+	<xc:ccDebugToolbar
+		load="true"
+		defaultCollapsed="false"
+		collapseTo="left">
+	</xc:ccDebugToolbar>
+	<xc:ccLayout>
+		<xp:this.facets>
+			<xc:ccPollConfig xp:key="facet_2"></xc:ccPollConfig>
+			<xc:ccNavigator xp:key="facet_1"></xc:ccNavigator>
+		</xp:this.facets>
+	</xc:ccLayout>
+</xp:view>

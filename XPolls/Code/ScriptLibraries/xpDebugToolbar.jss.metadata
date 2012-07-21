@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="852579C30052918D" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="216" sequence="1" unid="F246F2C22B02D561852579C60055065F">
-<created><datetime dst="true">20120319T112841,91-04</datetime></created>
-<modified><datetime dst="true">20120320T110556,91-04</datetime></modified>
-<revised><datetime dst="true">20120319T112841,93-04</datetime></revised>
-<lastaccessed><datetime dst="true">20120320T110556,91-04</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20120320T110556,91-04</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Daan Maliepaard/O=CITC</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Daan Maliepaard/O=CITC</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Daan Maliepaard/O=CITC</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Domino Administrator/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Mark Leusink/O=CITC</name><name>CN=Mark Leusink/O=LinQed</name><name>CN=Keith Strickland/OU=NA/O=GBS</name></updatedby>
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="85257A410003BCFF" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="182" sequence="2" unid="72CE4E74CF07DA5185257A410051531B">
+<created><datetime dst="true">20120720T104816,91-04</datetime></created>
+<modified><datetime dst="true">20120720T104817,20-04</datetime></modified>
+<revised><datetime dst="true">20120720T104817,19-04</datetime></revised>
+<lastaccessed><datetime dst="true">20120720T104817,20-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20120720T104817,01-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Keith Strickland/OU=NA/O=GBS</name></updatedby>
 <wassignedby><name>CN=Keith Strickland/OU=NA/O=GBS</name></wassignedby>
 <item name="$TITLE" sign="true"><text>xpDebugToolbar</text></item>
 <item name="$Flags"><text>.5834Q</text></item>
