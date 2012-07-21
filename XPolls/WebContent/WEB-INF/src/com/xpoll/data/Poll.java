@@ -10,7 +10,6 @@ import lotus.domino.Document;
 import lotus.domino.Item;
 import lotus.domino.NotesException;
 
-import com.debug.DebugToolbar;
 import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.xpoll.utils.JSFUtils;
 import com.xpoll.utils.MIMEBean;
@@ -180,11 +179,9 @@ public class Poll implements Serializable {
 
 	public void loadDoc() {
 		try {
-			DebugToolbar.info("Poll.loadDoc running");
 			if (getUnid() != null) {
 				Database db = JSFUtils.getCurrentDatabase();
 				String unid = getUnid();
-				DebugToolbar.info("unid = '" + unid + "'", "Poll.loadDoc");
 				if (unid != null && !unid.isEmpty()) {
 					Document doc = db.getDocumentByUNID(unid);
 					for (Object itemObj : doc.getItems()) {

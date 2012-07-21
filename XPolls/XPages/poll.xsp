@@ -4,9 +4,5 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom"
 	dojoTheme="true"
 	dojoParseOnLoad="true">
-	<xc:ccLayout>
-		<xp:this.facets>
-			<xc:ccPollConfig xp:key="facet_1"></xc:ccPollConfig>
-		</xp:this.facets>
-	</xc:ccLayout>
-</xp:view>
+	
+	<xc:ccPoll></xc:ccPoll></xp:view>

@@ -1,0 +1,19 @@
+label {
+	font-weight: normal !important;
+}
+.DisplayQuestionList {
+	list-style-type: none;
+	padding-left: 5px;
+}
+.DisplayQuestionListItem {
+	margin-top: 5px;
+}
+.DisplayQuestion {
+	font-weight: bold;
+}
+.lotusWidgetBody {
+	padding: 5px !important;
+}
+.AnswersContainer {
+	margin-left: 10px;
+}

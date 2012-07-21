@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents an answer item stored in the Question.answers property
+ * 
+ * @author Keith
+ * 
+ */
+
 public class Answer implements Serializable {
 
 	private String answer;
@@ -15,11 +22,6 @@ public class Answer implements Serializable {
 	private Question forQuestion;
 
 	public Answer() {
-		loadDoc();
-	}
-
-	public void loadDoc() {
-
 	}
 
 	public String getAnswer() {

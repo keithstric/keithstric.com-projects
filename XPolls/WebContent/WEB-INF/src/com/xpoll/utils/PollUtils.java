@@ -3,34 +3,41 @@ package com.xpoll.utils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
-import lotus.domino.Database;
-import lotus.domino.NotesException;
-import lotus.domino.View;
-import lotus.domino.ViewEntry;
-import lotus.domino.ViewEntryCollection;
+import lotus.domino.Document;
 
-import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.ibm.xsp.component.UISelectItemEx;
 import com.ibm.xsp.component.xp.XspInputText;
 import com.ibm.xsp.component.xp.XspSelectManyCheckbox;
 import com.ibm.xsp.component.xp.XspSelectOneMenu;
 import com.ibm.xsp.component.xp.XspSelectOneRadio;
 import com.ibm.xsp.validator.RequiredValidator;
+import com.xpoll.data.Answer;
+import com.xpoll.data.Poll;
+
+/**
+ * This is the PollUtils which just contains helper methods for displaying a
+ * poll to a user/voter
+ * 
+ * @author Keith
+ * 
+ */
 
 public class PollUtils implements Serializable {
 
-	private static List<String> answers;
-	private static UIComponent container;
+	private static final long serialVersionUID = 1L;
+	private static TreeMap<String, Answer> answers;
+	private static Poll dispPoll;
 
 	public static XspSelectManyCheckbox getCheckBoxes() {
 		XspSelectManyCheckbox chkBox = new XspSelectManyCheckbox();
 		chkBox.setId(FacesContext.getCurrentInstance().getViewRoot().createUniqueId());
 		chkBox.setLayout("pageDirection");
-		List<String> answers = getAnswers();
+		List<String> answers = getAnswersList();
 		return (XspSelectManyCheckbox) getSelectItems(chkBox, answers);
 	}
 
@@ -38,12 +45,12 @@ public class PollUtils implements Serializable {
 		XspSelectOneRadio radioBtn = new XspSelectOneRadio();
 		radioBtn.setId(FacesContext.getCurrentInstance().getViewRoot().createUniqueId());
 		radioBtn.setLayout("pageDirection");
-		List<String> answers = getAnswers();
+		List<String> answers = getAnswersList();
 		return (XspSelectOneRadio) getSelectItems(radioBtn, answers);
 	}
 
 	public static List<XspInputText> getInputText() {
-		List<String> answers = getAnswers();
+		List<String> answers = getAnswersList();
 		List<XspInputText> components = new ArrayList<XspInputText>();
 		for (String answer : answers) {
 			XspInputText inputText = new XspInputText();
@@ -64,7 +71,7 @@ public class PollUtils implements Serializable {
 	public static XspSelectOneMenu getComboBox() {
 		XspSelectOneMenu combo = new XspSelectOneMenu();
 		combo.setId(FacesContext.getCurrentInstance().getViewRoot().createUniqueId());
-		List<String> answers = getAnswers();
+		List<String> answers = getAnswersList();
 		return (XspSelectOneMenu) getSelectItems(combo, answers);
 	}
 
@@ -79,41 +86,33 @@ public class PollUtils implements Serializable {
 		return parentComp;
 	}
 
-	public static List<String> getAnswers() {
-		if (answers != null) {
-			return answers;
-		} else {
-			return new ArrayList<String>();
+	public static TreeMap<String, Answer> getAnswers() {
+		return answers;
+	}
+
+	public static void setAnswers(TreeMap<String, Answer> answers) {
+		PollUtils.answers = answers;
+	}
+
+	private static List<String> getAnswersList() {
+		TreeMap<String, Answer> answersMap = getAnswers();
+		List<String> answerList = new ArrayList<String>();
+		for (String key : answersMap.keySet()) {
+			answerList.add(answersMap.get(key).getAnswer());
 		}
+		return answerList;
 	}
 
-	public static List<String> getAnswers(String unid) {
-		try {
-			Database db = NotesContext.getCurrent().getCurrentDatabase();
-			View answerView = db.getView("(luAnswers)");
-			ViewEntryCollection entCol = answerView.getAllEntriesByKey(unid);
-			ViewEntry ent = entCol.getFirstEntry();
-			List<String> answers = new ArrayList();
-			while (ent != null) {
-				answers.add(ent.getDocument().getItemValueString("option"));
-				ent = entCol.getNextEntry(ent);
-			}
-			return answers;
-		} catch (NotesException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public static Poll getDispPoll() {
+		return dispPoll;
 	}
 
-	public void setAnswer(List<String> answer) {
-		this.answers = answer;
+	public static void setPoll(Poll dispPoll) {
+		PollUtils.dispPoll = dispPoll;
 	}
 
-	public static UIComponent getContainer() {
-		return container;
-	}
-
-	public void setContainer(UIComponent container) {
-		this.container = container;
+	public static Poll findPollClass(Document doc, String itemName) {
+		Poll foundPoll = (Poll) MIMEBean.restoreState(doc, itemName);
+		return foundPoll;
 	}
 }

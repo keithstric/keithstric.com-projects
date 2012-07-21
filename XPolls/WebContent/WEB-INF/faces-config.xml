@@ -5,6 +5,11 @@
     <managed-bean-class>com.xpoll.data.Poll</managed-bean-class>
     <managed-bean-scope>view</managed-bean-scope>
   </managed-bean>
+  <managed-bean>
+  	<managed-bean-name>XPollUtils</managed-bean-name>
+  	<managed-bean-class>com.xpoll.utils.PollUtils</managed-bean-class>
+  	<managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
   <!-- <managed-bean>
     <managed-bean-name>Question</managed-bean-name>
     <managed-bean-class>com.xpoll.data.Question</managed-bean-class>

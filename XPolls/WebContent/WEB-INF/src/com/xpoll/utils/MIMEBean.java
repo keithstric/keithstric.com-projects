@@ -14,6 +14,15 @@ import lotus.domino.Stream;
 
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
+/**
+ * This is the MIMEBean from the OpenNTF project titled WatrCoolr. Much of this
+ * class has been removed as it is not used. The methods here have not been
+ * modified in any way.
+ * 
+ * @author Tim Tripcony
+ * 
+ */
+
 public class MIMEBean {
 
 	public static Serializable restoreState(Document doc, String itemName) {

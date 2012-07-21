@@ -3,6 +3,14 @@ package com.xpoll.data;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * This is a user response/selection from a displayed poll and is stored in the
+ * Answer.responses property
+ * 
+ * @author Keith
+ * 
+ */
+
 public class Response implements Serializable {
 
 	private Answer forAnswer;

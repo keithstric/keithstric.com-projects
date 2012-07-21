@@ -3,6 +3,13 @@ package com.xpoll.data;
 import java.io.Serializable;
 import java.util.TreeMap;
 
+/**
+ * Represents a question item stored in the Poll.questions property
+ * 
+ * @author Keith
+ * 
+ */
+
 public class Question implements Serializable {
 
 	private String question;
@@ -14,10 +21,6 @@ public class Question implements Serializable {
 	private Poll forPoll;
 
 	public Question() {
-	}
-
-	public void loadDoc() {
-
 	}
 
 	public String getQuestion() {
