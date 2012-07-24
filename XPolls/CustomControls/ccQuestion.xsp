@@ -78,33 +78,30 @@
 					<xp:button
 						value="New Answer"
 						id="button1">
-						<xp:eventHandler
-							event="onclick"
-							submit="true"
+						<xp:eventHandler event="onclick" submit="true"
 							refreshMode="complete">
 							<xp:this.action><![CDATA[#{javascript:var quest:com.xpoll.data.Question = compositeData.pollQuestion;
 var numAnswers = quest.getAnswers().size() +1;
 var answersMap:java.util.Map = quest.getAnswers();
-var answerRepeat = getComponent("answersRepeat");
-answerRepeat.setRows(numAnswers);
 var newAnswer = new com.xpoll.data.Answer();
-//newAnswer.setForQuestion(quest);
-newAnswer.setSortOrder(numAnswers);
-//answersMap.push(newAnswer);
-answersMap.put(numAnswers.toString(), newAnswer);
+newAnswer.setSortOrder(parseInt(numAnswers));
+answersMap.put(parseInt(numAnswers), newAnswer);
 quest.setAnswers(answersMap);}]]></xp:this.action>
 						</xp:eventHandler>
 					</xp:button>
-					<xp:repeat
-						id="answersRepeat"
-						rows="0"
+					<xp:repeat id="answersRepeat"
 						value="#{javascript:return compositeData.pollQuestion.getAnswers().keySet();}"
-						var="answer"
-						indexVar="answerIndex">
+						var="answer" indexVar="answerIndex" repeatControls="false">
 
 
 
 
+						<xp:this.rows><![CDATA[#{javascript:var pollQuestion:com.xpoll.data.Question = compositeData.pollQuestion;
+if (pollQuestion && pollQuestion.getAnswers().size() > 0) {
+	return pollQuestion.getAnswers().size();
+}else{
+	return 0;
+}}]]></xp:this.rows>
 						<xc:ccAnswer
 							questionAnswer="#{javascript:Poll.getQuestions().get(question).getAnswers().get(answer);}">
 						</xc:ccAnswer>

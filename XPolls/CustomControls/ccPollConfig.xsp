@@ -260,34 +260,45 @@
 							<xp:button
 								value="New Question"
 								id="button2">
-								<xp:eventHandler
-									event="onclick"
-									submit="true"
-									refreshMode="partial"
-									refreshId="formTable5">
-									<xp:this.action><![CDATA[#{javascript:var numQuestions = Poll.getQuestions().size() +1;
-var questionsMap:java.util.Map = Poll.getQuestions();
-var questionRepeat = getComponent("questionsRepeat");
-questionRepeat.setRows(numQuestions);
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="partial" refreshId="formTable5">
+									<xp:this.action><![CDATA[#{javascript:var questionsMap:java.util.TreeMap = Poll.getQuestions();
+var numQuestions = questionsMap.size() +1;
+//var questionRepeat = getComponent("questionsRepeat");
+//questionRepeat.setRows(numQuestions);
+
+var lastKeyInt = numQuestions;
+if (!questionsMap.isEmpty()) {
+	var lastKey = questionsMap.lastKey();
+	lastKeyInt = (lastKey +1);
+}
+
 var newQuestion = new com.xpoll.data.Question();
-newQuestion.setSortOrder(numQuestions);
-questionsMap.put(numQuestions.toString(), newQuestion);
+newQuestion.setSortOrder(parseInt(lastKeyInt));
+questionsMap.put(parseInt(lastKeyInt), newQuestion);
+
 Poll.setQuestions(questionsMap);}]]></xp:this.action>
 								</xp:eventHandler>
 							</xp:button>
-							<xp:repeat
-								id="questionsRepeat"
+							<xp:repeat id="questionsRepeat"
 								value="#{javascript:return Poll.getQuestions().keySet();}"
-								var="question"
-								indexVar="questionIndex"
-								rows="0">
+								var="question" indexVar="questionIndex"
+								repeatControls="false">
 
 
 
 
 
 
-								<xc:ccQuestion pollQuestion="#{javascript:Poll.getQuestions().get(question);}"></xc:ccQuestion>
+								<xp:this.rows><![CDATA[#{javascript:var questionsMap:java.util.TreeMap = Poll.getQuestions();
+if (questionsMap && questionsMap.size > 0) {
+	return questionsMap.size();
+}else{
+	return 0;
+}}]]></xp:this.rows>
+								<xc:ccQuestion
+									pollQuestion="#{javascript:Poll.getQuestions().get(question);}">
+								</xc:ccQuestion>
 							</xp:repeat>
 						</xe:formRow>
 					</xe:formColumn>

@@ -16,7 +16,7 @@ public class Question implements Serializable {
 	private String description;
 	private String fieldType;
 	private String answerRequired;
-	private TreeMap<String, Answer> answers;
+	private TreeMap<Double, Answer> answers;
 	private Integer sortOrder;
 	private Poll forPoll;
 
@@ -55,15 +55,15 @@ public class Question implements Serializable {
 		this.answerRequired = answerRequired;
 	}
 
-	public TreeMap<String, Answer> getAnswers() {
+	public TreeMap<Double, Answer> getAnswers() {
 		if (answers != null) {
 			return answers;
 		} else {
-			return new TreeMap<String, Answer>();
+			return new TreeMap<Double, Answer>();
 		}
 	}
 
-	public void setAnswers(TreeMap<String, Answer> answers) {
+	public void setAnswers(TreeMap<Double, Answer> answers) {
 		this.answers = answers;
 	}
 

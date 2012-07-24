@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257A410003BCFF" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="16a" sequence="112" unid="473BE1CB5369871B85257A4100508F4C">
-<created><datetime dst="true">20120720T103955,64-04</datetime></created>
-<modified><datetime dst="true">20120721T121538,39-04</datetime></modified>
-<revised><datetime dst="true">20120721T121538,38-04</datetime></revised>
-<lastaccessed><datetime dst="true">20120721T121538,39-04</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20120720T103955,65-04</datetime></addedtofile></noteinfo>
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="852579C30052918D" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="292" sequence="61" unid="7F46F4586C488B3485257A45005190EF">
+<created><datetime dst="true">20120724T105055,19-04</datetime></created>
+<modified><datetime dst="true">20120724T121516,46-04</datetime></modified>
+<revised><datetime dst="true">20120724T121516,45-04</datetime></revised>
+<lastaccessed><datetime dst="true">20120724T121516,46-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20120724T105055,55-04</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Keith Strickland/OU=NA/O=GBS</name></updatedby>
 <wassignedby><name>CN=Keith Strickland/OU=NA/O=GBS</name></wassignedby>
 <item name="$Flags"><text>gC~4;</text></item>
 <item name="$TITLE"><text>ccPollConfig.xsp</text></item>
 
 
-
-
-
-<item name="$FileNames" sign="true"><text>ccPollConfig.xsp</text></item>
 <item name="$DesignerVersion"><text>8.5.3</text></item>
 
 
 
 
-</note>
+
+
+
+
+<item name="$FileNames" sign="true"><text>ccPollConfig.xsp</text></item></note>

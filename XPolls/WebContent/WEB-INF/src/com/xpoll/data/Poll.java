@@ -30,7 +30,7 @@ public class Poll implements Serializable {
 	private String sendEmailConfirmation;
 	private String emailSubject;
 	private String emailText;
-	private TreeMap<String, Question> questions;
+	private TreeMap<Integer, Question> questions;
 	private String unid;
 
 	public Poll() {
@@ -149,15 +149,15 @@ public class Poll implements Serializable {
 		this.emailText = emailText;
 	}
 
-	public TreeMap<String, Question> getQuestions() {
+	public TreeMap<Integer, Question> getQuestions() {
 		if (questions != null) {
 			return questions;
 		} else {
-			return new TreeMap<String, Question>();
+			return new TreeMap<Integer, Question>();
 		}
 	}
 
-	public void setQuestions(TreeMap<String, Question> questions) {
+	public void setQuestions(TreeMap<Integer, Question> questions) {
 		this.questions = questions;
 	}
 
