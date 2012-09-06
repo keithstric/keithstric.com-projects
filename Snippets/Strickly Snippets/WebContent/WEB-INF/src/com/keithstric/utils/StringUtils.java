@@ -46,4 +46,23 @@ public class StringUtils {
 		return result;
 	}
 	
+	public static String strLeft(String input, String delimiter) {
+		return input.substring(0, input.indexOf(delimiter));
+	}
+	public static String strRight(String input, String delimiter) {
+		return input.substring(input.indexOf(delimiter) + delimiter.length());
+	}
+	public static String strLeftBack(String input, String delimiter) {
+		return input.substring(0, input.lastIndexOf(delimiter));
+	}
+	public static String strLeftBack(String input, int chars) {
+		return input.substring(0, input.length() - chars);
+	}
+	public static String strRightBack(String input, String delimiter) {
+		return input.substring(input.lastIndexOf(delimiter) + delimiter.length());
+	}
+	public static String strRightBack(String input, int chars) {
+		return input.substring(input.length() - chars);
+	}
+	
 }

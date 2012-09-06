@@ -16,8 +16,10 @@ import lotus.domino.Base;
 import lotus.domino.Database;
 import lotus.domino.Document;
 import lotus.domino.NotesException;
+import lotus.domino.Session;
 
 import com.ibm.domino.xsp.module.nsf.NotesContext;
+import com.ibm.xsp.component.UIViewRootEx2;
 import com.ibm.xsp.designer.context.ServletXSPContext;
 import com.ibm.xsp.designer.context.XSPUrl;
 
@@ -231,5 +233,21 @@ public class JSFUtil implements Serializable {
 			o = ((UIInput) c).getValue();
 		}
 		return o;
+	}
+	
+	public static String getUserName() {
+		return (String)getBindingValue("#{context.user.name}");
+	}
+	public static Session getSession() {
+		return (Session)getVariableValue("session");
+	}
+	public static Session getSessionAsSigner() {
+		return (Session)getVariableValue("sessionAsSigner");
+	}
+	public static Database getDatabase() {
+		return (Database)getVariableValue("database");
+	}
+	public static UIViewRootEx2 getViewRoot() {
+		return (UIViewRootEx2)getVariableValue("view");
 	}
 }
