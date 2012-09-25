@@ -250,4 +250,17 @@ public class JSFUtil implements Serializable {
 	public static UIViewRootEx2 getViewRoot() {
 		return (UIViewRootEx2)getVariableValue("view");
 	}
+	
+	public static void log(String message) {
+		if (DEBUG) {
+			Throwable t = new Throwable();
+			StackTraceElement element = t.getStackTrace()[1];
+			StringBuilder sb = new StringBuilder();
+			sb.append(element.getClassName() + ".");
+			sb.append(element.getMethodName() + ".");
+			sb.append(element.getLineNumber() + ": ");
+			sb.append(message);
+			System.out.println(sb.toString());
+		}
+	}
 }
